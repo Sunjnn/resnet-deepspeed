@@ -101,7 +101,7 @@ def main():
         train_epoch(model_engine, train_loader, criterions, lr_scheduler)
         endTime = time.time()
         runTime = endTime - startTime
-        write_output(outdir, model_engine.local_rank, f"running time of epoch {i} / {epoch}: {runTime}")
+        write_output(outdir, model_engine.local_rank, f"running time of epoch {i} / {epoch}: {round(runTime, 2)}")
         if model_engine.local_rank == 0:
             write_output(outdir, model_engine.local_rank, f"epoch {i} / {epoch}")
             write_output(outdir, model_engine.local_rank, model.conv1.weight[0, 0])
