@@ -13,6 +13,12 @@ nohup deepspeed main.py --deepspeed --deepspeed_config /path/to/ds_config.json -
 
 ## run data parallel on multiple nodes
 
+Set IF names that nccl will use.
+
+``` bash
+export NCCL_SOCKET_IFNAME="all-names"
+```
+
 Specify the paths and nodes in the command below,
 and run it.
 
