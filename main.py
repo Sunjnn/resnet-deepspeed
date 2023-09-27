@@ -74,6 +74,7 @@ def main():
 
     train_dst = dataset(args.data_dir)
 
+    deepspeed.init_distributed()
     model_engine, optimizer, train_loader, _ = deepspeed.initialize(args=args, model=model, model_parameters=model.parameters(), training_data=train_dst)
     # criterion = nn.CrossEntropyLoss()
     # criterions = [{"func": nn.CrossEntropyLoss(), 'weight': 0.2}, {"func": nn.KLDivLoss(), "weight": 0.8}]

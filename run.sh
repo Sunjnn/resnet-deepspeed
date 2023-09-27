@@ -1,1 +1,0 @@
-nohup deepspeed main.py --deepspeed --deepspeed_config ds_config.json --data_dir /path/to/imagenet --out_dir /path/to/output > /path/to/out.log 2> /path/to/err.log &
