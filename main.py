@@ -86,10 +86,10 @@ def main():
     if not os.path.exists(outdir):
         os.makedirs(outdir)
 
-    if model_engine.local_rank == 0:
+    if model_engine.global_rank == 0:
         val_loader = dataloader(args.data_dir, int(model_engine.train_batch_size() / model_engine.world_size), False, False)
 
-    if model_engine.local_rank == 0:
+    if model_engine.global_rank == 0:
         write_output(outdir, model_engine.local_rank, f"before train")
         write_output(outdir, model_engine.local_rank, model.conv1.weight[0, 0])
         val_epoch(model_engine, val_loader, criterions, outdir)
@@ -103,7 +103,7 @@ def main():
         endTime = time.time()
         runTime = endTime - startTime
         write_output(outdir, model_engine.local_rank, f"running time of epoch {i} / {epoch}: {round(runTime, 2)}")
-        if model_engine.local_rank == 0:
+        if model_engine.global_rank == 0:
             write_output(outdir, model_engine.local_rank, f"epoch {i} / {epoch}")
             write_output(outdir, model_engine.local_rank, model.conv1.weight[0, 0])
             val_epoch(model_engine, val_loader, criterions, outdir)
